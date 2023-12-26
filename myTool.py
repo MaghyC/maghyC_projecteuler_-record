@@ -147,6 +147,48 @@ return abc
 #Problem_10
 #sum(findPrimeIn(n))
 
+#problem_11
+def find_20x20_multi(string):
+lis_1 = string.replace('\n', " ").split(' ')
+lis = []
+max = 1
+temp=1
+count = 0
+
+for i in range(0, 20):
+  j=0
+  while j < 20:
+    str = lis_1[i * 20 + j]
+    if str[0] == "0":
+      lis.append(int(str[1]))
+    else:
+      lis.append(int(str))
+    j+=1
+
+for i in range(3,20):
+  for j in range(0,20):
+    temp= lis[(i-3)*20+j]*lis[(i-2)*20+j]*lis[(i-1)*20+j]*lis[(i)*20+j]
+    if max<temp:
+      max=temp
+    temp=lis[i-3+j*20]*lis[i-2+j*20]*lis[i-1+j*20]*lis[i+j*20]
+
+    if max<temp:
+      max=temp
+i=0
+while i<17:
+  j=i
+  while j<17:
+    temp=lis[i*20+j]*lis[(i+1)*20+j+1]*lis[(i+2)*20+j+2]*lis[(i+3)*20+j+3]
+    if max<temp:
+      max=temp
+    temp=lis[i*20+20-j]*lis[(i+1)*20+20-j-1]*lis[(i+2)*20+20-j-2]*lis[(i+3)*20+20-j-3]
+    if max<temp:
+      max=temp
+    j+=1
+  i+=1
+print(lis)
+print(max)
+
 
     
 
