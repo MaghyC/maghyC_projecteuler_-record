@@ -34,21 +34,21 @@ def is_Prime_Lis(lis, n):
   return True
 
 def findPrimeIn(n):
-  if n<2:
+  n=n+1
+  if n < 2:
     return []
-  if n==2:
-    return np.array([2]) 
+  if n == 2:
+    return np.array([2])
   arr = np.repeat([True], int(n / 2))
-  lis = np.array([2]) 
+  lis = np.array([2])
   i = 3
-  while i < n:
+  while i <n:
     if arr[int(i / 2)]:
       lis = np.append(lis, i)
-      for _ in range(i, int(n / i) + 1, 2):
+      for _ in range(i, math.ceil(n/i), 2):
         arr[int(i * _ / 2)] = False
     i += 2
   return lis
-  
 
 #fProblem_5
 def findLCM(n):
@@ -188,6 +188,31 @@ while i<17:
   i+=1
 print(lis)
 print(max)
+
+#Problem_12
+def Highly_Divisible_Triangular_Number(N):
+  th = 1
+  num = 1
+  divisor_num = 1
+  while divisor_num < N:
+    divisor_num = 1
+    th += 1
+    num += th
+    prime_lis = findPrimeIn(th + 1)
+    dic = {key: 0 for key in prime_lis}
+    temp_n_1 = th + 1
+    temp_n_0 = th
+    for p in prime_lis:
+      while temp_n_1 % p == 0:
+        dic[p] += 1
+        temp_n_1 = temp_n_1 // p
+      while temp_n_0 % p == 0:
+        dic[p] += 1
+        temp_n_0 = temp_n_0 // p
+    dic[2] = dic[2] - 1
+    for key in dic:
+      divisor_num = divisor_num * (dic[key] + 1)
+  return num
 
 
 def Longest_Collatz_Sequence(N): #Problem_14
