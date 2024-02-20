@@ -256,5 +256,47 @@ def number_to_words_1000(n): #Problem_17
     else:
         return "onethousand"
 
+def Maximum_Path_Sum_I(text):#Problem_18
+    arr=text.split("\n")
+    lis= list(map(int, arr[-1].split(" ")))
+    for _ in range(2,len(arr)+1):
+        temp=list(map(int, arr[-_].split(" ")))
+        for i in range(0,len(temp)):
+            temp[i]=temp[i]+max(lis[i],lis[i+1])
+        lis=temp
+    return lis[0]
+
+def Counting_Sundays_1901_2000()::#Problem_19
+  yearid = 1900
+  monthid = 1
+  dayofmonth = 7
+  sunonfirst = 0
+  
+  def daysinmonth(year, month):
+      if month in [4, 6, 9, 11]: return 30
+      if month == 2:
+          if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0): return 29
+          else: return 28
+      return 31
+  
+  while yearid <= 2000 and monthid <= 12 and dayofmonth <= 31:
+      dim = daysinmonth(yearid, monthid)
+      if dayofmonth == 1 and yearid > 1900: sunonfirst += 1
+      dayofmonth += 7
+      if dayofmonth > dim:
+          dayofmonth -= dim
+          monthid += 1
+          if monthid == 13:
+              monthid = 1
+              yearid += 1
+  return sunonfirst
 
 
+def sum_of_divisors(n): #Problem_21
+    divisors = [1]
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            divisors.append(i)
+            if i != n // i:
+                divisors.append(n // i)
+    return sum(divisors)
