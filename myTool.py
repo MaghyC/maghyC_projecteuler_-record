@@ -3,6 +3,15 @@ import math
 
 
 # tools    
+def num_divisors(num): #Returns number of divisors a number has
+  sqrt = math.ceil(math.sqrt(num))
+  divisors = 2
+  for i in range(2,sqrt):
+    if num % i == 0:
+      divisors += 2
+  if num % sqrt == 0:
+    divisors += 1
+  return divisors
 def factorization(n):
   if n<2:
     return {}
@@ -192,27 +201,36 @@ print(max)
 #Problem_12
 def Highly_Divisible_Triangular_Number(N):
   th = 1
-  num = 1
+  
   divisor_num = 1
+ 
+  
   while divisor_num < N:
     divisor_num = 1
     th += 1
-    num += th
-    prime_lis = findPrimeIn(th + 1)
-    dic = {key: 0 for key in prime_lis}
     temp_n_1 = th + 1
     temp_n_0 = th
-    for p in prime_lis:
+    repeat_factor=0
+    divisor_num=1
+    while temp_n_1 %2==0:
+      repeat_factor+=1
+      temp_n_1=temp_n_1//2
+    while temp_n_0 %2==0:
+      repeat_factor+=1
+      temp_n_0=temp_n_0//2
+    divisor_num=divisor_num*repeat_factor
+    for p in range(3, temp_n_1,2):
+      repeat_factor=0
       while temp_n_1 % p == 0:
-        dic[p] += 1
+        repeat_factor+=1
         temp_n_1 = temp_n_1 // p
       while temp_n_0 % p == 0:
-        dic[p] += 1
+        repeat_factor+=1
         temp_n_0 = temp_n_0 // p
-    dic[2] = dic[2] - 1
-    for key in dic:
-      divisor_num = divisor_num * (dic[key] + 1)
-  return num
+      divisor_num*=(repeat_factor+1)
+  
+  return th*(th+1)/2
+
 
 
 def Longest_Collatz_Sequence(N): #Problem_14
