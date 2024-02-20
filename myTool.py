@@ -190,6 +190,33 @@ print(lis)
 print(max)
 
 
+def Longest_Collatz_Sequence(N): #Problem_14
+  max_length = 1
+  sta = 1
+  arr = np.zeros(N)
+  arr[0] = 1
+
+  def find_length_collatz_sequence(n):
+    if (len(arr) > n) and (arr[n - 1] != 0):
+      return arr[n - 1]
+    if n % 2 == 0:
+      res = find_length_collatz_sequence(n // 2) + 1
+    else:
+      res = find_length_collatz_sequence(3 * n + 1) + 1
+    if len(arr) >= n:
+      arr[n - 1] = res
+    return res
+
+  for i in range(1, N):
+    res = find_length_collatz_sequence(i)
+
+    if max_length < res:
+      max_length = res
+      sta = i
+  return sta
+
+
+
     
 
 
