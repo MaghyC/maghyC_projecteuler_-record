@@ -219,4 +219,24 @@ def Longest_Collatz_Sequence(N): #Problem_14
 
     
 
+def Lattice_Paths(x, y, n): #Problem_15
+    n=n+1
+    #lat=np.zeros(n*n)
+    
+    lat=[0]*(n*n)
+    lat[n*n-1]=1
+    def find_Lattice_Paths(x, y):# Problem_15
+       
+        if x>n-1 or y>n-1:
+            return 0
+    
+
+        if lat[x*n+y]!= 0:
+            return lat[x*n+y]
+        lat[x*n+y]=find_Lattice_Paths(x+1, y) +find_Lattice_Paths(x, y+1)
+        return lat[x*n+y]
+    
+    return find_Lattice_Paths(x, y)
+
+
 
