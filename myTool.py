@@ -239,4 +239,22 @@ def Lattice_Paths(x, y, n): #Problem_15
     return find_Lattice_Paths(x, y)
 
 
+def number_to_words_1000(n): #Problem_17
+    ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+            "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+    tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+    
+    if n < 20:
+        return ones[n]
+    elif n < 100:
+        return tens[n // 10] + ones[n % 10]
+    elif n < 1000:
+        if n % 100 == 0:
+            return ones[n // 100] + "hundred"
+        else:
+            return ones[n // 100] + "hundredand" + number_to_words(n % 100)
+    else:
+        return "onethousand"
+
+
 
